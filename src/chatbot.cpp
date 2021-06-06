@@ -44,14 +44,7 @@ ChatBot::~ChatBot()
 
 ChatBot::ChatBot(ChatBot &&source){
     std::cout << "ChatBot Move Constructor" << std::endl; 
-    _currentNode = source._currentNode; 
-    source._currentNode = nullptr; 
-    _rootNode = source._rootNode; 
-    source._currentNode = nullptr; 
-    _chatLogic = source._chatLogic; 
-    source._chatLogic = nullptr; 
-    _image = source._image; 
-    source.~ChatBot(); 
+    *this = std::move(source); 
 }
 
 ChatBot &ChatBot::operator=(ChatBot &&source){

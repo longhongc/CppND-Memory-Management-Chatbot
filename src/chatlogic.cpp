@@ -172,7 +172,7 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
 
                             // store reference in child node and parent node
                             (*childNode)->AddEdgeToParentNode(edge.get());
-                            (*parentNode)->AddEdgeToChildNode(edge);
+                            (*parentNode)->AddEdgeToChildNode(std::move(edge));
 
                         }
 
@@ -219,15 +219,15 @@ void ChatLogic::LoadAnswerGraphFromFile(std::string filename)
         }
     }
 
-    //ChatBot chatBot("../images/chatbot.png");
-    //_chatBot = &chatBot; 
-    _chatBot = std::make_shared<ChatBot>("../images/chatbot.png"); 
+    ChatBot chatBot("../images/chatbot.png");
+    _chatBot = &chatBot; 
+    //_chatBot = std::make_shared<ChatBot>("../images/chatbot.png"); 
     //std::cout <<_chatBot.get() <<std::endl; 
     _chatBot->SetChatLogicHandle(this);
 
     // add chatbot to graph root node
     _chatBot->SetRootNode(rootNode);
-    rootNode->MoveChatbotHere(_chatBot);
+    rootNode->MoveChatbotHere(std::move(chatBot));
     
     ////
     //// EOF STUDENT CODE
@@ -240,7 +240,8 @@ void ChatLogic::SetPanelDialogHandle(ChatBotPanelDialog *panelDialog)
 
 void ChatLogic::SetChatbotHandle(ChatBot *chatbot)
 {
-    _chatBot.reset(chatbot);
+    //_chatBot.reset(chatbot);
+    _chatBot = chatbot; 
 }
 
 void ChatLogic::SendMessageToChatbot(std::string message)

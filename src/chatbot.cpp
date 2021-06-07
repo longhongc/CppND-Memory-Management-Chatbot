@@ -42,9 +42,25 @@ ChatBot::~ChatBot()
     }
 }
 
+/*
+ * I did declare the copy constructor and the copy assignment.
+ * Yet, I make them unusable by =delete, since they are not used in this program.
+ */
+
 ChatBot::ChatBot(ChatBot &&source){
     std::cout << "ChatBot Move Constructor" << std::endl; 
-    *this = std::move(source); 
+    //*this = std::move(source); 
+    /*
+     * Why can't i use the above implementation to reduce duplicate code. 
+     */
+    _currentNode = source._currentNode; 
+    source._currentNode = nullptr; 
+    _rootNode = source._rootNode; 
+    source._currentNode = nullptr; 
+    _chatLogic = source._chatLogic; 
+    source._chatLogic = nullptr; 
+    _image = source._image; 
+    source._image = NULL; 
 }
 
 ChatBot &ChatBot::operator=(ChatBot &&source){
@@ -59,7 +75,7 @@ ChatBot &ChatBot::operator=(ChatBot &&source){
     _chatLogic = source._chatLogic; 
     source._chatLogic = nullptr; 
     _image = source._image; 
-    source.~ChatBot(); 
+    source._image = NULL; 
     return *this; 
 }
 //// STUDENT CODE

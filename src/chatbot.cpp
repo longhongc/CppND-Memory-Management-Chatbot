@@ -46,6 +46,24 @@ ChatBot::~ChatBot()
  * I did declare the copy constructor and the copy assignment.
  * Yet, I make them unusable by =delete, since they are not used in this program.
  */
+ChatBot::ChatBot(ChatBot &source){
+    std::cout << "ChatBot Copy Constructor" << std::endl; 
+    _currentNode = source._currentNode; 
+    _rootNode = source._rootNode; 
+    _chatLogic = source._chatLogic; 
+    _image = source._image; 
+}
+
+ChatBot &ChatBot::operator=(ChatBot &source){
+    std::cout << "ChatBot Copy Assignment" << std::endl; 
+    if(this == &source){
+        return *this; 
+    }
+    _currentNode = source._currentNode; 
+    _rootNode = source._rootNode; 
+    _chatLogic = source._chatLogic; 
+    _image = source._image; 
+}
 
 ChatBot::ChatBot(ChatBot &&source){
     std::cout << "ChatBot Move Constructor" << std::endl; 

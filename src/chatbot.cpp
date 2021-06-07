@@ -48,7 +48,7 @@ ChatBot::ChatBot(ChatBot &source){
     _rootNode = source._rootNode; 
     _chatLogic = source._chatLogic; 
     _chatLogic->SetChatbotHandle(this); 
-    _image = source._image; 
+    _image = new wxBitmap(*source._image);
 }
 
 ChatBot &ChatBot::operator=(ChatBot &source){
@@ -60,7 +60,7 @@ ChatBot &ChatBot::operator=(ChatBot &source){
     _rootNode = source._rootNode; 
     _chatLogic = source._chatLogic; 
     _chatLogic->SetChatbotHandle(this); 
-    _image = source._image; 
+    _image = new wxBitmap(*source._image);
 }
 
 ChatBot::ChatBot(ChatBot &&source){

@@ -6,7 +6,6 @@
 #include "chatlogic.h"
 
 class GraphNode; // forward declaration
-//class ChatLogic; // forward declaration
 
 class ChatBot
 {
@@ -32,11 +31,6 @@ public:
     ChatBot(ChatBot &&source); // move constuctor
     ChatBot &operator=(ChatBot &&source); // move assignement 
 
-    //// STUDENT CODE
-    ////
-
-    ////
-    //// EOF STUDENT CODE
 
     // getters / setters
     void SetCurrentNode(GraphNode *node);
